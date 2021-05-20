@@ -1,0 +1,12 @@
+.song-table {
+    width: 100%;
+}
+
+thead, td {
+    border: 1px solid black;
+    text-align: left;
+}
+
+.th-background {
+    background-color: lightblue;
+}

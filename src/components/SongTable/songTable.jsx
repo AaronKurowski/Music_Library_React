@@ -1,13 +1,14 @@
 import React from 'react';
 import Song from '../Song/song.jsx';
+import './songTable.css';
 
 
 function SongTable(props) {
     return(
         <div className="container-fluid">
-            <table>
-                <thead>
-                    <tr className="th-background">
+            <table className="song-table">
+                <thead className="th-background">
+                    <tr>
                         <th>Song Title</th>
                         <th>Artist</th>
                         <th>Album</th>
@@ -15,7 +16,9 @@ function SongTable(props) {
                         <th>Likes</th>
                     </tr>
                 </thead>
-                <Song />
+                <tbody>
+                    <Song songs={props.songs} />
+                </tbody>
             </table>
         </div>
     );
