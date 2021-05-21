@@ -1,3 +1,4 @@
+import axios from 'axios';
 import React, { Component } from 'react';
 
 class AddSong extends Component {
@@ -5,7 +6,7 @@ class AddSong extends Component {
         title: '',
         artist: '',
         album: '',
-        releaseDate: ''
+        release_date: ''
     }
 
     handleChange(event) {
@@ -14,23 +15,23 @@ class AddSong extends Component {
         })
     }
 
+    // this might change to send straight to the back end
     handleSubmit(event) {
         event.preventDefault();
         const song = {
             title: this.state.title,
             artist: this.state.artist,
             album: this.state.album,
-            releaseDate: this.state.releaseDate
+            release_date: this.state.releaseDate
         }
-        this.props.addNewSong(song);
+        this.props.addNewSong(song)
         this.setState({
             title: '',
             artist: '',
             album: '',
-            releaseDate: ''
+            release_date: ''
         });
     }
-
 
     render() {
         return(
@@ -46,7 +47,7 @@ class AddSong extends Component {
                     <input type="text" name="album" value={this.state.album} onChange={(event) => this.handleChange(event)}></input>
 
                     <label>Release Date</label>
-                    <input type="date" name="releaseDate" value={this.state.releaseDate} onChange={(event) => this.handleChange(event)}></input>
+                    <input type="date" name="releaseDate" value={this.state.release_date} onChange={(event) => this.handleChange(event)}></input>
 
                     <button type="submit" value="Add">Add Song</button>
                 </form>
