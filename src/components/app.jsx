@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import './app.css';
-import Song from './Song/song.jsx';
 import AddSong from './AddSong/addSong.jsx';
 import SongTable from './SongTable/songTable.jsx';
 import axios from 'axios';
@@ -11,11 +10,23 @@ class App extends Component {
         this.state = {
             songs: []
         }
+        this.makeGetRequest = this.makeGetRequest.bind(this);
     }
 
     componentDidMount() {
         this.makeGetRequest();
     }
+
+    // shouldComponentUpdate() {
+    //     if(true){
+    //         this.makeGetRequest();
+    //     }
+    // }
+
+    componentWillMount(){
+        console.log('will mount')
+    }
+
 
     removeSongFromState(array, song) {
         let index = array.indexOf(song);
@@ -29,10 +40,14 @@ class App extends Component {
         try{
             await axios.delete(`http://127.0.0.1:8000/music/${song.id}/`)
             console.log(song)
-            let newState = this.removeSongFromState(this.state.songs, song)
-            this.setState({
-                songs: newState
-            });
+
+            // i don't think i need to manuall change state like this 
+            // let newState = this.removeSongFromState(this.state.songs, song)
+            // this.setState({
+            //     songs: newState
+            // });
+
+        //    this.makeGetRequest();
         }
         catch (error) {
             console.log("Error: Song doesn't exists or something")
@@ -69,8 +84,8 @@ class App extends Component {
                 {/* Add Title bar for main library page */}
                     <h1>
                     ♬ Aaron's Music Library ♬
-                    </h1>(
-                <SongTable songs={this.state.songs} handleDelete={(song) => this.handleDelete(song)}/>
+                    </h1>
+                <SongTable songs={this.state.songs} handleDelete={this.handleDelete}/>
                 {/* Add another title then under this a table per yooj */}
                 {/* Create a form to add new songs */}
                 <AddSong addNewSong={(song) => this.addNewSong(song)} />
