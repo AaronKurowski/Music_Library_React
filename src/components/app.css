@@ -1,7 +1,11 @@
-h1 {
+h1, h2 {
     text-align: center;
     text-shadow: 2px 2px mediumseagreen;
     color: midnightblue;
+}
+
+h2 {
+    text-align: left;
 }
 
 .left-image-header {

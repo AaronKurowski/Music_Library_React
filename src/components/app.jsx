@@ -17,17 +17,6 @@ class App extends Component {
         this.makeGetRequest();
     }
 
-    // shouldComponentUpdate() {
-    //     if(true){
-    //         this.makeGetRequest();
-    //     }
-    // }
-
-    componentWillMount(){
-        console.log('will mount')
-    }
-
-
     removeSongFromState(array, song) {
         let index = array.indexOf(song);
         if(index >= 0){
@@ -47,7 +36,7 @@ class App extends Component {
             //     songs: newState
             // });
 
-        //    this.makeGetRequest();
+            // this.makeGetRequest();
         }
         catch (error) {
             console.log("Error: Song doesn't exists or something")
@@ -85,12 +74,14 @@ class App extends Component {
                     <h1>
                     ♬ Aaron's Music Library ♬
                     </h1>
+                    <h2>Add a song: </h2>
+                <AddSong  />
                 <SongTable songs={this.state.songs} handleDelete={this.handleDelete}/>
                 {/* Add another title then under this a table per yooj */}
                 {/* Create a form to add new songs */}
-                <AddSong addNewSong={(song) => this.addNewSong(song)} />
+                
             </div>
-        )
+        );
     }
 }
 
