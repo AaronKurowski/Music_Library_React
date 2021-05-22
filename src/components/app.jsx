@@ -11,6 +11,7 @@ class App extends Component {
             songs: []
         }
         this.makeGetRequest = this.makeGetRequest.bind(this);
+        this.handleDelete = this.handleDelete.bind(this);
     }
 
     componentDidMount() {
@@ -25,21 +26,22 @@ class App extends Component {
         return array;
     }
 
-    async handleDelete(song) {
+    async handleDelete(delSong) {
+        // changes state to update dynamically
+        const currentSongs = this.state.songs;
+        this.setState({
+            songs: currentSongs.filter(song => song.id !== delSong.id)
+        });
+
         try{
-            await axios.delete(`http://127.0.0.1:8000/music/${song.id}/`)
-            console.log(song)
-
-            // i don't think i need to manuall change state like this 
-            // let newState = this.removeSongFromState(this.state.songs, song)
-            // this.setState({
-            //     songs: newState
-            // });
-
-            // this.makeGetRequest();
+            await axios.delete(`http://127.0.0.1:8000/music/${delSong.id}/`);
+            console.log(delSong);
         }
         catch (error) {
-            console.log("Error: Song doesn't exists or something")
+            console.log("An error occured. \nReturning songs...")
+            this.setState({
+                songs: currentSongs
+            });
         }
     }
 
@@ -57,8 +59,6 @@ class App extends Component {
         console.log(this.state.songs);
     }
 
-
-    // might not even need this
     addNewSong(song) {
         this.setState({
             songs: [...this.state.songs, song]
@@ -75,7 +75,7 @@ class App extends Component {
                     ♬ Aaron's Music Library ♬
                     </h1>
                     <h2>Add a song: </h2>
-                <AddSong  />
+                <AddSong addSongToState={(song) => this.addNewSong(song)} />
                 <SongTable songs={this.state.songs} handleDelete={this.handleDelete}/>
                 {/* Add another title then under this a table per yooj */}
                 {/* Create a form to add new songs */}

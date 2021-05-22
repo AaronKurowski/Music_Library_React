@@ -21,21 +21,28 @@ class AddSong extends Component {
 
     handleSubmit(event) {
         event.preventDefault();
-        debugger;
+
+        // store song details the user inputted
         const song = {
             title: this.state.title,
             artist: this.state.artist,
             album: this.state.album,
             release_date: this.state.release_date
         }
+
+        // This change of state will update dynamically without recalling a get request
+        this.props.addSongToState(song);
+
+        // make the axios request
         try{
             let response = axios.post('http://127.0.0.1:8000/music/', song);
-            debugger;
             console.log(response);
         }
         catch(er){
             console.log('Something bad happened')
         }
+
+        // change addSongs state to be ready for the next input from user
         this.setState({
             title: '',
             artist: '',
