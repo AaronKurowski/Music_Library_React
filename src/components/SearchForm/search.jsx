@@ -20,18 +20,19 @@ class Search extends Component {
         const searchQuery = {
             searchTerm: this.state.searchTerm.toLowerCase()
         }
-        debugger;
         this.props.addSearchTerm(searchQuery);
     }
 
     render() {
         return(
-            <form onSubmit={(event) => this.handleSearch(event)}>
-                <label for="title">Search</label>
-                {/* Don't forget to pass down inputValue and songFilter */}
-                <input type="text" id="title" name="searchTerm" value={this.state.searchTerm} onChange={(event) => this.handleChange(event)}></input>
-                <button type="submit">Search</button>
-            </form>
+            <div className="container-fluid">
+            <form className="d-flex" onSubmit={(event) => this.handleSearch(event)}>
+                    <label for="title"/>
+                    {/* Don't forget to pass down inputValue and songFilter */}
+                    <input className="form-control me-2" type="text" id="title" name="searchTerm" value={this.state.searchTerm} onChange={(event) => this.handleChange(event)}></input>
+                    <button className="btn btn-outline-success" type="submit">Search</button>
+                </form>
+            </div>
         );
     }
 

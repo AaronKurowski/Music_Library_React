@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { Component } from 'react';
-import Modal from './modal.jsx';
+import {Button, Modal} from 'react-bootstrap';
 
 class AddSong extends Component {
     constructor(props) {
@@ -9,10 +9,17 @@ class AddSong extends Component {
             title: '',
             artist: '',
             album: '',
-            release_date: ''
+            release_date: '',
+            show: false
         }
     }
     
+    handleModal() {
+        this.setState({
+            show: !this.state.show
+        });
+    }
+
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
@@ -44,31 +51,42 @@ class AddSong extends Component {
 
         // change addSongs state to be ready for the next input from user
         this.setState({
-            title: '',
-            artist: '',
-            album: '',
-            release_date: ''
+            song: {
+                title: '',
+                artist: '',
+                album: '',
+                release_date: ''
+            }
         });
     }
 
     render() {
         return(
             <div className="container-fluid">
-                <form onSubmit={(event) => this.handleSubmit(event)}>
-                    <label>Title</label>
-                    <input type="text" name="title" value={this.state.title} onChange={(event) => this.handleChange(event)}></input>
-            
-                    <label>Artist</label>
-                    <input type="text" name="artist" value={this.state.artist} onChange={(event) => this.handleChange(event)}></input>
-            
-                    <label>Album</label>
-                    <input type="text" name="album" value={this.state.album} onChange={(event) => this.handleChange(event)}></input>
-            
-                    <label>Release Date</label>
-                    <input type="date" name="release_date" value={this.state.release_date} onChange={(event) => this.handleChange(event)}></input>
-            
-                    <button type="submit" value="Add">Add Song</button>
-                </form>
+                <Button onClick={() => {this.handleModal()}}>Add Song</Button>
+                <Modal show={this.state.show} onHide={() => {this.handleModal()}}>
+                    <Modal.Header>Header</Modal.Header>
+                    <Modal.Body>
+                        <form onSubmit={(event) => this.handleSubmit(event)}>
+                            <label>Title</label>
+                            <input type="text" name="title" value={this.state.title} onChange={(event) => this.handleChange(event)}></input>
+                    
+                            <label>Artist</label>
+                            <input type="text" name="artist" value={this.state.artist} onChange={(event) => this.handleChange(event)}></input>
+                    
+                            <label>Album</label>
+                            <input type="text" name="album" value={this.state.album} onChange={(event) => this.handleChange(event)}></input>
+                    
+                            <label>Release Date</label>
+                            <input type="date" name="release_date" value={this.state.release_date} onChange={(event) => this.handleChange(event)}></input>
+                    
+                            <button type="submit" value="Add">Add Song</button>
+                        </form>
+                    </Modal.Body>
+                    <Modal.Footer>
+                        <Button onClick={() => {this.handleModal()}}>Close</Button>
+                    </Modal.Footer>
+                </Modal>
             </div>
         );
     }

@@ -21,7 +21,6 @@ class App extends Component {
     }
 
     filterSongs(songs, query) {
-        debugger;
         console.log(query);
         if(!query.searchTerm){
             return songs;
@@ -73,7 +72,6 @@ class App extends Component {
     }
 
     addSearchTerm(query) {
-        debugger;
         this.setState({
             searchTerm: query
         });
@@ -84,10 +82,11 @@ class App extends Component {
         return (
             <div className="container-fluid">
                 <h1>♬ Aaron's Music Library ♬</h1>
-                <h2>Add a song: </h2>
-                <Search addSearchTerm={(query) => this.addSearchTerm(query)} handleSearch={this.handleSearch}/>
-                <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
-                <SongTable state={this.state} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
+                <div>
+                    <Search addSearchTerm={(query) => this.addSearchTerm(query)} handleSearch={this.handleSearch}/>  
+                    <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
+                    <SongTable state={this.state} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
+                </div>
             </div>
         );
     }
