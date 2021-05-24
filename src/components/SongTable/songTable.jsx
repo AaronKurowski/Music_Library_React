@@ -16,7 +16,7 @@ function SongTable(props) {
                     </tr>
                 </thead>
                 <tbody>
-                    <Song songs={props.songs} handleDelete={props.handleDelete} />
+                    <Song state={props.state} handleDelete={props.handleDelete} filterSongs={props.filterSongs} />
                 </tbody>
             </table>
         </div>

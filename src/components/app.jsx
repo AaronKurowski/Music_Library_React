@@ -3,12 +3,14 @@ import './app.css';
 import AddSong from './AddSong/addSong.jsx';
 import SongTable from './SongTable/songTable.jsx';
 import axios from 'axios';
+import Search from './SearchForm/search.jsx';
 
 class App extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            songs: []
+            songs: [],
+            searchTerm: ''
         }
         this.makeGetRequest = this.makeGetRequest.bind(this);
         this.handleDelete = this.handleDelete.bind(this);
@@ -18,12 +20,18 @@ class App extends Component {
         this.makeGetRequest();
     }
 
-    removeSongFromState(array, song) {
-        let index = array.indexOf(song);
-        if(index >= 0){
-            array.splice(index, 1);
+    filterSongs(songs, query) {
+        debugger;
+        console.log(query);
+        if(!query.searchTerm){
+            return songs;
         }
-        return array;
+        let filteredSongs = songs.filter((song) => {
+            if(song.title.toLowerCase() === query.searchTerm.toLowerCase()){
+                return true;
+            }
+        });
+        return filteredSongs;
     }
 
     async handleDelete(delSong) {
@@ -45,7 +53,6 @@ class App extends Component {
         }
     }
 
-
     async makeGetRequest() {
         try{
             let response = await axios.get('http://127.0.0.1:8000/music/');
@@ -65,21 +72,22 @@ class App extends Component {
         });
     }
 
+    addSearchTerm(query) {
+        debugger;
+        this.setState({
+            searchTerm: query
+        });
+    }
 
     render() {
         console.log(this.state.songs)
         return (
             <div className="container-fluid">
-                {/* Add Title bar for main library page */}
-                    <h1>
-                    ♬ Aaron's Music Library ♬
-                    </h1>
-                    <h2>Add a song: </h2>
-                <AddSong addSongToState={(song) => this.addNewSong(song)} />
-                <SongTable songs={this.state.songs} handleDelete={this.handleDelete}/>
-                {/* Add another title then under this a table per yooj */}
-                {/* Create a form to add new songs */}
-                
+                <h1>♬ Aaron's Music Library ♬</h1>
+                <h2>Add a song: </h2>
+                <Search addSearchTerm={(query) => this.addSearchTerm(query)} handleSearch={this.handleSearch}/>
+                <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
+                <SongTable state={this.state} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
             </div>
         );
     }

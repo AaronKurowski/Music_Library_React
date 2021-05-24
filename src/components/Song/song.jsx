@@ -3,7 +3,11 @@ import './song.css';
 
 
 function Song(props){
-    return props.songs.map((song) => {
+    console.log(props.state.songs);
+    console.log(props.state.searchTerm);
+    debugger;
+    const filteredSongs = props.filterSongs(props.state.songs, props.state.searchTerm)
+    return filteredSongs.map((song) => {
         const { id, title, artist, album, release_date } = song
         return (
             <tr>

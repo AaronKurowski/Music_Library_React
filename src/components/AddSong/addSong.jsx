@@ -12,7 +12,7 @@ class AddSong extends Component {
             release_date: ''
         }
     }
-
+    
     handleChange(event) {
         this.setState({
             [event.target.name]: event.target.value
