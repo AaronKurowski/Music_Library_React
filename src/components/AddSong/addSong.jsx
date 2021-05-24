@@ -1,6 +1,7 @@
 import axios from 'axios';
 import React, { Component } from 'react';
 import {Button, Modal} from 'react-bootstrap';
+import './modal.css';
 
 class AddSong extends Component {
     constructor(props) {
@@ -62,7 +63,7 @@ class AddSong extends Component {
 
     render() {
         return(
-            <div className="container-fluid">
+            <div className="container-fluid d-flex justify-content-center modal-spacing">
                 <Button onClick={() => {this.handleModal()}}>Add Song</Button>
                 <Modal show={this.state.show} onHide={() => {this.handleModal()}}>
                     <Modal.Header>Header</Modal.Header>

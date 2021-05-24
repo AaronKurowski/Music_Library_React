@@ -26,7 +26,7 @@ class App extends Component {
             return songs;
         }
         let filteredSongs = songs.filter((song) => {
-            if(song.title.toLowerCase() === query.searchTerm.toLowerCase()){
+            if(song.title.toLowerCase() === query.searchTerm.toLowerCase() || song.artist.toLowerCase() === query.searchTerm.toLowerCase() || song.album.toLowerCase() === query.searchTerm.toLowerCase() || song.release_date.toLowerCase() === query.searchTerm.toLowerCase()){
                 return true;
             }
         });
