@@ -21,7 +21,7 @@ function Song(props){
                         <button type="submit" for={title} onClick={() => props.handleDelete(song)}>X</button>
                     </div>
                     <div className="center">
-                        <UpdateSong mainStateSongs={props.state}/>
+                        <UpdateSong addSongToState={props.addNewSong} mainStateSongs={props.state}/>
                     </div>
                     
                 </td>

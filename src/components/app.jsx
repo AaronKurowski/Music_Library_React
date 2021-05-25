@@ -27,7 +27,7 @@ class App extends Component {
             return songs;
         }
         let filteredSongs = songs.filter((song) => {
-            if(song.title.toLowerCase() === query.searchTerm.toLowerCase() || song.artist.toLowerCase() === query.searchTerm.toLowerCase() || song.album.toLowerCase() === query.searchTerm.toLowerCase() || song.release_date.toLowerCase() === query.searchTerm.toLowerCase()){
+            if(song.title.toLowerCase() === query.searchTerm.toLowerCase() || song.artist.toLowerCase() === query.searchTerm.toLowerCase() || song.album.toLowerCase() === query.searchTerm.toLowerCase() || song.genre.toLowerCase() === query.searchTerm.toLowerCase() || song.release_date.toLowerCase() === query.searchTerm.toLowerCase()){
                 return true;
             }
         });
@@ -53,6 +53,23 @@ class App extends Component {
         }
     }
 
+    // async handleUpdate(upSong) {
+    //     const currentSongs = this.state.songs;
+    //     this.setState({
+    //         songs: [...this.state.songs, ]
+    //     });
+
+    //     try{
+    //         await axios.put(`http://127.0.0.1:8000/music/${upSong.id}/`)
+    //     }
+    //     catch(error){
+    //         console.log("Error occured during update.")
+    //     }
+    //     this.setState({
+
+    //     })
+    // }
+
     async makeGetRequest() {
         try{
             let response = await axios.get('http://127.0.0.1:8000/music/');
@@ -70,6 +87,7 @@ class App extends Component {
         this.setState({
             songs: [...this.state.songs, song]
         });
+        alert("Song added!")
     }
 
     addSearchTerm(query) {
@@ -88,7 +106,7 @@ class App extends Component {
                     <div className="container-fluid d-flex justify-content-center modal-spacing">
                         <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
                     </div>
-                    <SongTable state={this.state} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
+                    <SongTable state={this.state} addSongToState={(song) => this.addNewSong(song)} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
                 </div>
             </div>
         );

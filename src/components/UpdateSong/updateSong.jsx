@@ -8,12 +8,20 @@ class UpdateSong extends Component {
     constructor(props){
         super(props);
         this.state = {
+            id: '',
             title: '',
             artist: '',
             album: '',
             genre: '',
-            release_date: ''
-        }
+            release_date: '',
+            show: false
+        };
+    };
+
+    handleModal() {
+        this.setState({
+            show: !this.state.show
+        });
     }
 
     handleChange(event) {
@@ -22,22 +30,32 @@ class UpdateSong extends Component {
         });
     }
 
-    handleSubmit(event){
-        const currentSongs = this.props.mainStateSongs;
-        this.setState({
-            
-        });
+
+    handleSubmit(event, upSong){
+        event.preventDefault();
+        
+        const song = {
+            title: this.state.title,
+            artist: this.state.artist,
+            album: this.state.album,
+            genre: this.state.genre,
+            release_date: this.state.release_date
+        }
 
         try{
-            let response = axios.put();
+            axios.put(`http://127.0.0.1:8000/music/${upSong.id}/`);
         }
         catch(error){
             console.log("Error trying to update song");
         }
-
         this.setState({
-            
-        })
+            id: '',
+            title: '',
+            artist: '',
+            album: '',
+            genre: '',
+            release_date: '',
+        });
 
     }
 
@@ -49,7 +67,7 @@ class UpdateSong extends Component {
                 <Modal show={this.state.show} onHide={() => {this.handleModal()}}>
                     <Modal.Header>Update Song</Modal.Header>
                     <Modal.Body>
-                        <form onSubmit>
+                        <form onSubmit={(event) => this.handleSubmit(event)}>
                             <label>Title</label>
                             <input type="text" name="title" value={this.state.title} onChange={(event) => this.handleChange(event)}></input>
 
@@ -65,11 +83,11 @@ class UpdateSong extends Component {
                             <label>Release Date</label>
                             <input type="date" name="release_date" value={this.state.release_date} onChange={(event) => this.handleChange(event)}></input>
                         
-                        <button type="submit" value="Add">Add Song</button>
+                        <button type="submit" value="Add">Update!</button>
                     </form>
                     </Modal.Body>
                     <Modal.Footer>
-                        <Button onClick={() => {this.handleModal()}}>Close</Button>
+                        <Button onClick={(song) => {this.handleModal(song)}}>Close</Button>
                     </Modal.Footer>
                 </Modal>
             </div>
