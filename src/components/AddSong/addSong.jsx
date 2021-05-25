@@ -10,6 +10,7 @@ class AddSong extends Component {
             title: '',
             artist: '',
             album: '',
+            genre: '',
             release_date: '',
             show: false
         }
@@ -35,6 +36,7 @@ class AddSong extends Component {
             title: this.state.title,
             artist: this.state.artist,
             album: this.state.album,
+            genre: this.state.genre,
             release_date: this.state.release_date
         }
 
@@ -56,6 +58,7 @@ class AddSong extends Component {
                 title: '',
                 artist: '',
                 album: '',
+                genre: '',
                 release_date: ''
             }
         });
@@ -63,10 +66,10 @@ class AddSong extends Component {
 
     render() {
         return(
-            <div className="container-fluid d-flex justify-content-center modal-spacing">
+            <React.Fragment>
                 <Button onClick={() => {this.handleModal()}}>Add Song</Button>
                 <Modal show={this.state.show} onHide={() => {this.handleModal()}}>
-                    <Modal.Header>Header</Modal.Header>
+                    <Modal.Header>Add a Song</Modal.Header>
                     <Modal.Body>
                         <form onSubmit={(event) => this.handleSubmit(event)}>
                             <label>Title</label>
@@ -77,6 +80,9 @@ class AddSong extends Component {
                     
                             <label>Album</label>
                             <input type="text" name="album" value={this.state.album} onChange={(event) => this.handleChange(event)}></input>
+
+                            <label>Genre</label>
+                            <input type="text" name="genre" value={this.state.genre} onChange={(event) => this.handleChange(event)}></input>
                     
                             <label>Release Date</label>
                             <input type="date" name="release_date" value={this.state.release_date} onChange={(event) => this.handleChange(event)}></input>
@@ -88,7 +94,7 @@ class AddSong extends Component {
                         <Button onClick={() => {this.handleModal()}}>Close</Button>
                     </Modal.Footer>
                 </Modal>
-            </div>
+                </React.Fragment>
         );
     }
 }

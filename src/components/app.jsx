@@ -4,6 +4,7 @@ import AddSong from './AddSong/addSong.jsx';
 import SongTable from './SongTable/songTable.jsx';
 import axios from 'axios';
 import Search from './SearchForm/search.jsx';
+import UpdateSong from './UpdateSong/updateSong.jsx';
 
 class App extends Component {
     constructor(props) {
@@ -83,8 +84,10 @@ class App extends Component {
             <div className="container-fluid">
                 <h1>♬ Aaron's Music Library ♬</h1>
                 <div>
-                    <Search addSearchTerm={(query) => this.addSearchTerm(query)} handleSearch={this.handleSearch}/>  
-                    <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
+                    <Search addSearchTerm={(query) => this.addSearchTerm(query)} handleSearch={this.handleSearch}/> 
+                    <div className="container-fluid d-flex justify-content-center modal-spacing">
+                        <AddSong addSongToState={(song) => this.addNewSong(song)} handleChange={this.handleChange} />
+                    </div>
                     <SongTable state={this.state} handleDelete={this.handleDelete} filterSongs={this.filterSongs}/>             
                 </div>
             </div>

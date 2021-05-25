@@ -2,7 +2,11 @@
     width: 100%;
 }
 
-thead, td {
+.table {
+    border-collapse: collapse;
+}
+
+thead, td, tr {
     border: 1px solid black;
     text-align: left;
 }

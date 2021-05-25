@@ -5,14 +5,15 @@ import './songTable.css';
 function SongTable(props) {
     return(
         <div className="container-fluid">
-            <table className="song-table">
+            <table className="table song-table">
                 <thead className="th-background">
                     <tr>
                         <th>Song Title</th>
                         <th>Artist</th>
                         <th>Album</th>
+                        <th>Genre</th>
                         <th>Release Date</th>
-                        <th>Delete</th>
+                        <th>Delete/Update</th>
                     </tr>
                 </thead>
                 <tbody>

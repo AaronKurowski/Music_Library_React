@@ -28,7 +28,6 @@ class Search extends Component {
             <div className="container-fluid">
             <form className="d-flex" onSubmit={(event) => this.handleSearch(event)}>
                     <label for="title"/>
-                    {/* Don't forget to pass down inputValue and songFilter */}
                     <input className="form-control me-2" type="text" id="title" name="searchTerm" value={this.state.searchTerm} onChange={(event) => this.handleChange(event)}></input>
                     <button className="btn btn-outline-success" type="submit">Search</button>
                 </form>
